@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Base application theme.这个是隐藏状态栏-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <!-- 隐藏状态栏 -->
+        <item name="android:windowFullscreen">true</item>
+        <!-- 隐藏标题栏 -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>

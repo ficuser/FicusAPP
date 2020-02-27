@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="5dp">
+    <LinearLayout
+        android:id="@+id/tourist_image"
+        android:layout_gravity="left|top"
+        android:layout_height="260dp"
+        android:layout_width="wrap_content"
+        tools:ignore="RtlHardcoded">
+        <TextView
+            android:id="@+id/tourist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center_horizontal|bottom"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
