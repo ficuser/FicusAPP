@@ -5,33 +5,72 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
 
+import com.example.ficus.Fragment.MyFragmentPaperAdapter;
 import com.example.ficus.Hotel.Hotel;
 import com.example.ficus.Map.Map;
 import com.example.ficus.Tourist.Tourist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class MainActivity extends AppCompatActivity {
 
+
+    //几个代表页面的常量
+    public static final int PAGE_ONE = 0;
+    public static final int PAGE_TWO = 1;
+    public static final int PAGE_THREE = 2;
+    public static final int PAGE_FOUR = 3;
+
+    private ViewPager vpager;
+    private boolean isContinue = true;//判断是否轮播
+    private MyFragmentPaperAdapter mAdapter;
+    private AtomicInteger what=new AtomicInteger(0);
+    private ViewGroup group;
+
     private DrawerLayout mDraerLayout;
     private Context mContext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //viewpaper
+        mAdapter = new MyFragmentPaperAdapter(getSupportFragmentManager());
+        vpager = (ViewPager) findViewById(R.id.Tourist_paper);
+        //ViewGroup group = (ViewGroup) findViewById(R.id.viewGroup);
+        vpager.setAdapter(mAdapter);
+        initMagicIndicator1();
+
+        Button city_button=(Button)findViewById(R.id.city_button);
+        city_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mDraerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -94,6 +133,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private void initMagicIndicator1() {
+        MagicIndicator magicIndicator = this.findViewById(R.id.magic_indicator1);
+        CircleNavigator circleNavigator = new CircleNavigator(this);
+        circleNavigator.setCircleCount(4);
+        circleNavigator.setCircleColor(Color.RED);
+        circleNavigator.setCircleClickListener(new CircleNavigator.OnCircleClickListener() {
+            @Override
+            public void onClick(int index) {
+                vpager.setCurrentItem(index);
+            }
+        });
+        magicIndicator.setNavigator(circleNavigator);
+        ViewPagerHelper.bind(magicIndicator,vpager);
+    }
+
+
     public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.toolbar,menu);
         return true;

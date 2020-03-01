@@ -18,24 +18,54 @@
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_scrollFlags="scroll|enterAlways|snap" />
+                app:layout_scrollFlags="scroll|enterAlways|snap"/>
         </com.google.android.material.appbar.AppBarLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="550dp"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <RelativeLayout
+                android:id="@+id/relativeL"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/Tourist_paper"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
+                </androidx.viewpager.widget.ViewPager>
+                <Button
+                    android:id="@+id/city_button"
+                    android:text="防城港"
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="83dp"
+                    android:layout_height="38dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/citytext2_bg" />
+                <net.lucode.hackware.magicindicator.MagicIndicator
+                    android:id="@+id/magic_indicator1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+
             <Button
                 android:layout_width="90dp"
                 android:layout_height="40dp"
                 android:id="@+id/hotel_button"
                 android:text="酒店"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 />
             <Button
                 android:layout_width="90dp"
                 android:layout_height="40dp"
                 android:id="@+id/tourist_button"
                 android:text="景点"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
             <Button
 
@@ -43,19 +73,20 @@
                 android:layout_height="40dp"
                 android:id="@+id/text_button"
                 android:text="攻略"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
             <Button
                 android:layout_width="90dp"
                 android:layout_height="40dp"
                 android:id="@+id/map_button"
                 android:text="地图"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 />
-
-
             <Button
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:text="写游记"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 />
         </LinearLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
