@@ -13,12 +13,19 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         tools:ignore="RtlHardcoded">
-        <TextView
-            android:id="@+id/paper_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center_horizontal|bottom"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000">
+            <TextView
+                android:id="@+id/paper_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="#FFFFFF"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

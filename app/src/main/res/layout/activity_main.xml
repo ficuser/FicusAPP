@@ -8,21 +8,9 @@
     <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_scrollFlags="scroll|enterAlways|snap"/>
-        </com.google.android.material.appbar.AppBarLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <RelativeLayout
@@ -38,13 +26,20 @@
                 <Button
                     android:id="@+id/city_button"
                     android:text="防城港"
+                    android:gravity="bottom|center"
                     android:textSize="16sp"
                     android:textColor="#FFFFFF"
-                    android:layout_width="83dp"
-                    android:layout_height="38dp"
+                    android:layout_width="65dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:background="@drawable/citytext2_bg" />
+                    android:background="#00000000" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="55dp"
+                    android:layout_alignBottom="@id/city_button"
+                    android:background="@drawable/down"/>
                 <net.lucode.hackware.magicindicator.MagicIndicator
                     android:id="@+id/magic_indicator1"
                     android:layout_width="wrap_content"
@@ -52,42 +47,70 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
-
-            <Button
-                android:layout_width="90dp"
-                android:layout_height="40dp"
-                android:id="@+id/hotel_button"
-                android:text="酒店"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                />
-            <Button
-                android:layout_width="90dp"
-                android:layout_height="40dp"
-                android:id="@+id/tourist_button"
-                android:text="景点"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
-            <Button
-
-                android:layout_width="90dp"
-                android:layout_height="40dp"
-                android:id="@+id/text_button"
-                android:text="攻略"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
-            <Button
-                android:layout_width="90dp"
-                android:layout_height="40dp"
-                android:id="@+id/map_button"
-                android:text="地图"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                />
-            <Button
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:text="写游记"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                />
+            <androidx.percentlayout.widget.PercentRelativeLayout
+                android:layout_height="300dp"
+                android:layout_width="match_parent"
+                xmlns:percent="http://schemas.android.com/apk/res-auto">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/hotel_button"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:text="酒店"
+                    android:background="#f1fc49"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    percent:layout_heightPercent="35%"
+                    percent:layout_widthPercent="65%"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:background="#fc9228"
+                    android:id="@+id/tourist_button"
+                    android:text="景点"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    percent:layout_heightPercent="35%"
+                    percent:layout_widthPercent="35%"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/text_button"
+                    android:text="攻略"
+                    android:background="#3bffeb"
+                    android:layout_below="@+id/tourist_button"
+                    android:layout_alignParentRight="true"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    percent:layout_heightPercent="35%"
+                    percent:layout_widthPercent="65%"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/map_button"
+                    android:background="#fc4828"
+                    android:layout_below="@+id/hotel_button"
+                    android:layout_alignParentLeft="true"
+                    android:text="地图"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    percent:layout_heightPercent="35%"
+                    percent:layout_widthPercent="35%"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="#2eff5b"
+                    android:text="写游记"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    percent:layout_heightPercent="30%"
+                    percent:layout_widthPercent="100%"
+                    />
+            </androidx.percentlayout.widget.PercentRelativeLayout>
         </LinearLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -95,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            app:srcCompat="@drawable/ic_done"
+            app:srcCompat="@drawable/home2"
             app:elevation="8dp"/>
     </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
     <com.google.android.material.navigation.NavigationView

@@ -3,17 +3,20 @@ package com.example.ficus;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        statusBarHide(this);
 
         //viewpaper
         mAdapter = new MyFragmentPaperAdapter(getSupportFragmentManager());
@@ -70,12 +74,13 @@ public class MainActivity extends AppCompatActivity {
                 mDraerLayout.openDrawer(GravityCompat.START);
             }
         });
-
+        /*
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);*/
 
         mDraerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
         NavigationView navView=(NavigationView)findViewById(R.id.nav_view);
+        /*
         ActionBar actionBar=getSupportActionBar();
         if(actionBar!=null)
         {
@@ -89,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 mDraerLayout.closeDrawers();
                 return true;
             }
-        });
+        });*/
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -149,10 +154,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    //状态栏隐藏
+    public static void statusBarHide(Activity activity){
+        // 代表 5.0 及以上
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            View decorView = activity.getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            decorView.setSystemUiVisibility(option);
+            activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+            return;
+        }
+        // versionCode > 4.4  and versionCode < 5.0
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
+    }
     public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.toolbar,menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
