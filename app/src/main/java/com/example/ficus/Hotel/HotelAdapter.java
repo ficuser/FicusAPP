@@ -71,7 +71,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         holder.hotelPrice.setText(hotel.gerPrice());
     }
     @Override
-    public int getItemCount() {
+    public int getItemCount(){
         return mHotelList.size();
     }
 }

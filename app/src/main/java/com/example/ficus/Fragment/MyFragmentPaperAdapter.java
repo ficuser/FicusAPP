@@ -41,11 +41,7 @@ public class MyFragmentPaperAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        System.out.println("position Destory" + position);
-        super.destroyItem(container, position, object);
-    }
-    @Override
+    //获取给定位置的项Id，用于生成Fragment名称
     public Fragment getItem(int position) {
         Fragment fragment = null;
         switch (position){

@@ -16,12 +16,12 @@
             <RelativeLayout
                 android:id="@+id/relativeL"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="330dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/Tourist_paper"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp">
+                    android:layout_height="330dp">
                 </androidx.viewpager.widget.ViewPager>
                 <Button
                     android:id="@+id/city_button"
@@ -48,68 +48,112 @@
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
             <androidx.percentlayout.widget.PercentRelativeLayout
-                android:layout_height="300dp"
+                android:layout_height="400dp"
                 android:layout_width="match_parent"
                 xmlns:percent="http://schemas.android.com/apk/res-auto">
-                <Button
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView1"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:id="@+id/hotel_button"
+                    android:layout_margin="5dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:text="酒店"
-                    android:background="#f1fc49"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     percent:layout_heightPercent="35%"
-                    percent:layout_widthPercent="65%"
-                    />
-                <Button
+                    percent:layout_widthPercent="62%"
+                    app:cardCornerRadius="5dp">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/hotel_button"
+                        android:text="酒店"
+                        android:background="#f1fc49"
+                        android:textSize="24sp"
+                        android:textColor="#686868"
+                        />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:background="#fc9228"
-                    android:id="@+id/tourist_button"
-                    android:text="景点"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     percent:layout_heightPercent="35%"
-                    percent:layout_widthPercent="35%"
-                    />
-                <Button
+                    percent:layout_widthPercent="33%"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#fc9228"
+                        android:id="@+id/tourist_button"
+                        android:text="景点"
+                        android:textSize="24sp"
+                        android:textColor="#686868"
+                        />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    percent:layout_heightPercent="30%"
+                    percent:layout_widthPercent="62%"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:id="@+id/text_button"
-                    android:text="攻略"
-                    android:background="#3bffeb"
-                    android:layout_below="@+id/tourist_button"
-                    android:layout_alignParentRight="true"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    percent:layout_heightPercent="35%"
-                    percent:layout_widthPercent="65%"
-                    />
-                <Button
+                    android:layout_below="@+id/cardView1"
+                    android:layout_alignParentRight="true">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/text_button"
+                        android:text="攻略"
+                        android:textSize="22sp"
+                        android:textColor="#686868"
+                        android:background="#f7c3d3"
+                        />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:id="@+id/map_button"
-                    android:background="#fc4828"
-                    android:layout_below="@+id/hotel_button"
-                    android:layout_alignParentLeft="true"
-                    android:text="地图"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    percent:layout_heightPercent="35%"
-                    percent:layout_widthPercent="35%"
-                    />
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:background="#2eff5b"
-                    android:text="写游记"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     percent:layout_heightPercent="30%"
+                    percent:layout_widthPercent="33%"
+                    android:layout_below="@+id/cardView2"
+                    android:layout_alignParentLeft="true">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/map_button"
+                        android:background="#fc4828"
+                        android:text="地图"
+                        android:textSize="22sp"
+                        android:textColor="#686868"
+                        />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    percent:layout_heightPercent="28%"
                     percent:layout_widthPercent="100%"
-                    />
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true">
+                    <Button
+                        android:id="@+id/edit_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#2eff5b"
+                        android:text="写游记"
+                        android:textSize="22sp"
+                        android:textColor="#686868"
+                        />
+                </androidx.cardview.widget.CardView>
             </androidx.percentlayout.widget.PercentRelativeLayout>
         </LinearLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton

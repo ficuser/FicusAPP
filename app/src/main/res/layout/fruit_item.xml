@@ -7,10 +7,9 @@
     android:layout_margin="5dp"
     app:cardCornerRadius="5dp">
     <LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/fruit_image"
             android:layout_width="match_parent"

@@ -1,7 +1,5 @@
 package com.example.ficus;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -21,10 +19,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ficus.Edit.ImageShow;
+import com.example.ficus.Login.activity.LoginActivity;
+import com.example.ficus.Edit.Edit;
 import com.example.ficus.Fragment.MyFragmentPaperAdapter;
-import com.example.ficus.Hotel.Hotel;
+import com.example.ficus.Hotel.HotelAcitivity;
 import com.example.ficus.Map.Map;
-import com.example.ficus.Tourist.Tourist;
+import com.example.ficus.Tourist.TouristActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -33,7 +34,6 @@ import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         //viewpaper
         mAdapter = new MyFragmentPaperAdapter(getSupportFragmentManager());
         vpager = (ViewPager) findViewById(R.id.Tourist_paper);
-        //ViewGroup group = (ViewGroup) findViewById(R.id.viewGroup);
         vpager.setAdapter(mAdapter);
         initMagicIndicator1();
 
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,Login.class);
+                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         hotel.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent=new Intent(MainActivity.this,Hotel.class);
+                Intent intent=new Intent(MainActivity.this, HotelAcitivity.class);
                 startActivity(intent);
             }
         });
@@ -117,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         tourist.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent=new Intent(MainActivity.this, Tourist.class);
+                Intent intent=new Intent(MainActivity.this, TouristActivity.class);
                 startActivity(intent);
             }
         });
@@ -137,6 +136,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button edit=findViewById(R.id.edit_button);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,"正在加载，剩余2.5s",Toast.LENGTH_SHORT).show();
+                Intent intent =new Intent (MainActivity.this, ImageShow.class);
+                startActivity(intent);
+                /*
+                Intent intent =new Intent (MainActivity.this, Edit.class);
+                startActivity(intent);*/
+            }
+        });
     }
     private void initMagicIndicator1() {
         MagicIndicator magicIndicator = this.findViewById(R.id.magic_indicator1);
@@ -152,9 +164,6 @@ public class MainActivity extends AppCompatActivity {
         magicIndicator.setNavigator(circleNavigator);
         ViewPagerHelper.bind(magicIndicator,vpager);
     }
-
-
-
     //状态栏隐藏
     public static void statusBarHide(Activity activity){
         // 代表 5.0 及以上
@@ -169,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-
     }
     public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.toolbar,menu);

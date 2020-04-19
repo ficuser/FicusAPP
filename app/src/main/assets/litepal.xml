@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="test"/>
+    <version value="3"/>
+    <list>
+        <mapping class="com.example.test.db.User"/>
+        <mapping class="com.example.test.db.Image"/>
+        <mapping class="com.example.test.db.Tourist"/>
+        <mapping class="com.example.test.db.Hotel"/>
+        <mapping class="com.example.test.db.View"/>
+        <mapping class="com.example.test.db.Province"/>
+    </list>
+</litepal>
