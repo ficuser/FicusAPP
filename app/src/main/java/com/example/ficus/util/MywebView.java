@@ -53,6 +53,5 @@ public class MywebView extends WebView {
             }
         });
         webView.loadUrl(address);
-
     }
 }

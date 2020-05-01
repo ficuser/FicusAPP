@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="5dp">
+    android:layout_margin="7dp">
     <LinearLayout
         android:id="@+id/tourist_paper"
         android:layout_gravity="left|top"
@@ -21,7 +19,7 @@
                 android:id="@+id/paper_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="#FFFFFF"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"

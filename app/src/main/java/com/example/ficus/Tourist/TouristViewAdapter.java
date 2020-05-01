@@ -4,28 +4,41 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.ficus.R;
 import com.example.ficus.SetData;
+import com.example.ficus.db.Hotel;
+import com.example.ficus.db.Tourist;
 
 import java.util.List;
 
 public class TouristViewAdapter extends RecyclerView.Adapter<TouristViewAdapter.ViewHolder>{
-    private List<SetData> mTouristViewList;
+    private List<String> mTouristViewList;
+
+
 
     private Context mContext;
 
-    public TouristViewAdapter(List<SetData> hotelList) {
-        mTouristViewList=hotelList;
+    private List<Tourist> mTouristsViewList;
+
+    public TouristViewAdapter(List<String> touristList) {
+        mTouristViewList=touristList;
+        //mTouristsViewList=hotelsList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if(mContext==null)
+        {
+            mContext=parent.getContext();
+        }
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.touristview_item,parent,false);
         ViewHolder holder=new ViewHolder(view);
         return holder;
@@ -33,8 +46,22 @@ public class TouristViewAdapter extends RecyclerView.Adapter<TouristViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        SetData touristview =mTouristViewList.get(position);
-        holder.touristViewImage.setBackgroundResource(touristview.getImageId());
+        String imageUrl=mTouristViewList.get(position);
+
+        Glide.with(mContext)
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(holder.touristViewImage);
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull ViewHolder holder)//这个方法是Adapter里面的
+    {
+        if (holder != null)
+        {
+            Glide.clear(holder.touristViewImage);
+        }
+        super.onViewRecycled(holder);
     }
 
     @Override
@@ -44,10 +71,10 @@ public class TouristViewAdapter extends RecyclerView.Adapter<TouristViewAdapter.
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout touristViewImage;
+        ImageView touristViewImage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            touristViewImage=(LinearLayout) itemView.findViewById(R.id.text4);
+            touristViewImage=(ImageView) itemView.findViewById(R.id.TouristList_ImageView);
         }
     }
 }

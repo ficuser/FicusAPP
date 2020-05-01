@@ -178,6 +178,7 @@ public class Map extends AppCompatActivity{
             mBaiduMap.addOverlay(mPolygonOptions);
              */
         }
+
     }
     //将地图移到“我”的位置上
     private void navigateTo(BDLocation location)

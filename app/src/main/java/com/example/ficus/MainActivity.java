@@ -19,15 +19,15 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.ficus.Edit.ImageShow;
+import com.example.ficus.Image.ImageShow;
 import com.example.ficus.Login.activity.LoginActivity;
-import com.example.ficus.Edit.Edit;
 import com.example.ficus.Fragment.MyFragmentPaperAdapter;
 import com.example.ficus.Hotel.HotelAcitivity;
+import com.example.ficus.Map.Edit;
 import com.example.ficus.Map.Map;
 import com.example.ficus.Tourist.TouristActivity;
+import com.example.ficus.way.wayActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private AtomicInteger what=new AtomicInteger(0);
     private ViewGroup group;
 
-    private DrawerLayout mDraerLayout;
+    public DrawerLayout mDraerLayout;
     private Context mContext;
 
 
@@ -78,7 +78,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);*/
 
         mDraerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
-        NavigationView navView=(NavigationView)findViewById(R.id.nav_view);
+        //NavigationView navView=(NavigationView)findViewById(R.id.nav_view);
+        /*    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_content"
+        />*/
         /*
         ActionBar actionBar=getSupportActionBar();
         if(actionBar!=null)
@@ -105,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button hotel=findViewById(R.id.hotel_button);
+        hotel.getBackground().setAlpha(100);
         hotel.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -120,11 +128,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         Button text=findViewById(R.id.text_button);
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,Map.class);
+                Intent intent =new Intent(MainActivity.this, wayActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -132,8 +142,11 @@ public class MainActivity extends AppCompatActivity {
         map.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent=new Intent(MainActivity.this, Map.class);
+                Intent intent =new Intent (MainActivity.this,Map.class);
                 startActivity(intent);
+                /*
+                Intent intent=new Intent(MainActivity.this, Map.class);
+                startActivity(intent);*/
             }
         });
 
