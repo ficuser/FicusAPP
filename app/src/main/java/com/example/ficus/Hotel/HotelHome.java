@@ -18,20 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.baidu.mapapi.map.Text;
 import com.bumptech.glide.Glide;
+import com.example.ficus.Login.activity.LoginActivity;
+import com.example.ficus.MainActivity;
 import com.example.ficus.NetWork;
 import com.example.ficus.R;
 import com.example.ficus.db.Hotel;
 import com.example.ficus.util.HttpUtil;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import org.litepal.LitePal;
-
-import java.io.IOException;
-import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HotelHome extends AppCompatActivity {
     public static  String HOTEL_NAME="hotel_name";
@@ -46,8 +40,6 @@ public class HotelHome extends AppCompatActivity {
     public static  String hotelPrice="hotelPrice";
     public static  String hotelUser="hotelUser";
     public static  String hotelUrl="hotelUrl";
-    private List<Hotel> hotelList;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -66,7 +58,7 @@ public class HotelHome extends AppCompatActivity {
         String HotelEvaluate=intent.getStringExtra(hotelEvaluate);
         String HotelPrice=intent.getStringExtra(hotelPrice);
         String HotelUser=intent.getStringExtra(hotelUser);
-        String HotelUrl=intent.getStringExtra(hotelUrl);
+        final String HotelUrl=intent.getStringExtra(hotelUrl);
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         CollapsingToolbarLayout collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
@@ -104,6 +96,17 @@ public class HotelHome extends AppCompatActivity {
         //这里有点问题
         collapsingToolbarLayout.setTitle(HotelName);
         fruitContentText.setText(HotelEvaluate+HotelTag);
+
+
+        FloatingActionButton fab = findViewById(R.id.hotelurl_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(HotelHome.this,XieCheng.class);
+                intent.putExtra(XieCheng.hotelUrl,HotelUrl);
+                startActivity(intent);
+            }
+        });
     }
     //状态栏隐藏
     public static void statusBarHide(Activity activity){

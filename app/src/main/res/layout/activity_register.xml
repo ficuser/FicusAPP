@@ -52,14 +52,6 @@
                 android:maxLength="11"
                 android:singleLine="true"
                 android:autofillHints="" tools:targetApi="o" />
-
-            <Button
-                android:id="@+id/bt_get_otp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="bt_get_code" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,25 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_otpCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="tv_code" />
-
-            <EditText
-                android:id="@+id/et_otpCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:hint="et_code"
-                android:inputType="number"
-                android:maxLength="6"
-                android:singleLine="true"
-                android:autofillHints="" tools:targetApi="o" />
 
             <TextView
                 android:id="@+id/tv_usernaem"
@@ -119,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:ems="10"
-                android:hint="et_gender"
+                android:hint="1表示男，2表示女"
                 android:inputType="number"
                 android:maxLength="1"
                 android:singleLine="true"
@@ -181,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="32dp"
-                android:text="bt_register" />
+                android:text="提交" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

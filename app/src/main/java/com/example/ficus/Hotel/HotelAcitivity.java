@@ -91,11 +91,10 @@ public class HotelAcitivity extends AppCompatActivity {
             for(Hotel hotel :hotels){
                 hotelLists.add(new SetData(hotel.getHotelHostelName(),hotel.getHotelPrice(),hotel.getHotelImageUrl()));
             }
-            if(flag!=false) {
+            if(flag!=false){
                 adapter.notifyDataSetChanged();
             }else
             {
-
             }
            // recyclerView.set
         }else{
@@ -140,7 +139,6 @@ public class HotelAcitivity extends AppCompatActivity {
             });
             }
         });
-
     }
     /*显示进度对话框*/
     private void showProgressDialog()
@@ -163,17 +161,17 @@ public class HotelAcitivity extends AppCompatActivity {
     }
     private void refreshFruits()
     {
-        new Thread(new Runnable() {
+        new Thread(new Runnable(){
             @Override
-            public void run() {
+            public void run(){
                 try {
                     Thread.sleep(2000);
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }
-                runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable(){
                     @Override
-                    public void run() {
+                    public void run(){
                         //initHotel();
                         adapter.notifyDataSetChanged();
                         swipeRefresh.setRefreshing(false);
@@ -183,4 +181,3 @@ public class HotelAcitivity extends AppCompatActivity {
         }).start();
     }
 }
-

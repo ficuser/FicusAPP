@@ -158,6 +158,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/hotelurl_button"
         android:layout_margin="16dp"
         android:src="@drawable/run"
         app:layout_anchor="@id/appBar"

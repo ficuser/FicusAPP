@@ -5,9 +5,6 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.baidu.location.BDLocation;
@@ -243,7 +240,7 @@ public class Map extends AppCompatActivity{
                             finish();
                             return ;
                         }else{
-                            Toast.makeText(this,"发生未知错误",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this,"发生未知错误，请再试一次",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

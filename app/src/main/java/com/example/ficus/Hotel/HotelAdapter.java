@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -54,22 +55,33 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
                 int position=holder.getAdapterPosition();
-                Hotel hotel =mHotelsList.get(position);
-                Intent intent=new Intent(mContext,HotelHome.class);
-                intent.putExtra(HotelHome.HOTEL_NAME,hotel.getHotelHostelName());
-                intent.putExtra(HotelHome.hotelAddress,hotel.getHotelAddress());
-                intent.putExtra(HotelHome.hotelCharm,hotel.getHotelCharm());
-                intent.putExtra(HotelHome.hotelEvaluate,hotel.getHotelEvaluate());
-                intent.putExtra(HotelHome.hotelImageUrl,hotel.getHotelImageUrl());
-                intent.putExtra(HotelHome.hotelLow,hotel.getHotelLow());
-                intent.putExtra(HotelHome.hotelPrice,hotel.getHotelPrice());
-                intent.putExtra(HotelHome.hotelScore,hotel.getHotelScore());
-                intent.putExtra(HotelHome.hotelStar,hotel.getHotelStar());
-                intent.putExtra(HotelHome.hotelTag,hotel.getHotelTag());
-                intent.putExtra(HotelHome.hotelUrl,hotel.getHotelUrl());
-                intent.putExtra(HotelHome.hotelUser,hotel.getHotelUser());
-                mContext.startActivity(intent);
+                if(mHotelsList==null||mHotelsList.size()==0)
+                {
+                    Toast.makeText(mContext,"未知错误，再试一次！",Toast.LENGTH_SHORT).show();
+                }else{
+                    try{
+                        Hotel hotel =mHotelsList.get(position);
+                        Intent intent=new Intent(mContext,HotelHome.class);
+                        intent.putExtra(HotelHome.HOTEL_NAME,hotel.getHotelHostelName());
+                        intent.putExtra(HotelHome.hotelAddress,hotel.getHotelAddress());
+                        intent.putExtra(HotelHome.hotelCharm,hotel.getHotelCharm());
+                        intent.putExtra(HotelHome.hotelEvaluate,hotel.getHotelEvaluate());
+                        intent.putExtra(HotelHome.hotelImageUrl,hotel.getHotelImageUrl());
+                        intent.putExtra(HotelHome.hotelLow,hotel.getHotelLow());
+                        intent.putExtra(HotelHome.hotelPrice,hotel.getHotelPrice());
+                        intent.putExtra(HotelHome.hotelScore,hotel.getHotelScore());
+                        intent.putExtra(HotelHome.hotelStar,hotel.getHotelStar());
+                        intent.putExtra(HotelHome.hotelTag,hotel.getHotelTag());
+                        intent.putExtra(HotelHome.hotelUrl,hotel.getHotelUrl());
+                        intent.putExtra(HotelHome.hotelUser,hotel.getHotelUser());
+                        mContext.startActivity(intent);
+                    }catch (Exception e){
+                        Toast.makeText(mContext,"未知错误，再试两次！",Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
         return holder;

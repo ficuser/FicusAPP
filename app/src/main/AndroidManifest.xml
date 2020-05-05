@@ -26,13 +26,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".way.wayActivity"></activity>
+        <activity android:name=".Hotel.XieCheng"></activity>
+        <activity android:name=".way.wayActivity" />
         <activity android:name=".Tourist.TouristActivity" />
-        <activity android:name=".Tourist.TouristView"/>
+        <activity android:name=".Tourist.TouristView" />
         <activity android:name=".Image.ImageShow" />
         <activity android:name=".Map.Edit" />
         <activity android:name=".Map.Map" />
-        <activity android:name=".Login.activity.LoginActivity" />
+        <activity android:name=".MainActivity"/>
         <activity android:name=".Login.activity.RegisterActivity" />
         <activity android:name=".Hotel.HotelHome" />
         <activity android:name=".Hotel.HotelAcitivity" />
@@ -46,10 +47,10 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".Login.activity.LoginActivity"
+            tools:ignore="DuplicateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

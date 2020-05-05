@@ -37,11 +37,9 @@ public class RegisterActivity extends AppCompatActivity
 
     // Log打印的通用Tag
     private final String TAG = "RegisterActivity";
-
-    Button bt_get_otp = null;
     Button bt_submit_register = null;
     EditText et_telphone = null;
-    EditText et_otpCode = null;
+    //EditText et_otpCode = null;
     EditText et_username = null;
     EditText et_gender = null;
     EditText et_age = null;
@@ -80,10 +78,8 @@ public class RegisterActivity extends AppCompatActivity
 
     // 初始化UI对象
     private void initUI() {
-        bt_get_otp = findViewById(R.id.bt_get_otp);
         bt_submit_register = findViewById(R.id.bt_submit_register);
         et_telphone = findViewById(R.id.et_telphone);
-        et_otpCode = findViewById(R.id.et_otpCode);
         et_username = findViewById(R.id.et_username);
         et_gender = findViewById(R.id.et_gender);
         et_age = findViewById(R.id.et_age);
@@ -153,7 +149,6 @@ public class RegisterActivity extends AppCompatActivity
 
     // 为点击事件的UI对象设置监听器
     private void setOnClickListener() {
-        bt_get_otp.setOnClickListener(this);
         bt_submit_register.setOnClickListener(this);
     }
 
@@ -161,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         String telphone = et_telphone.getText().toString();
-        String otpCode = et_otpCode.getText().toString();
+        //String otpCode = et_otpCode.getText().toString();
         String username = et_username.getText().toString();
         String gender = et_gender.getText().toString();
         String age = et_age.getText().toString();
@@ -169,17 +164,8 @@ public class RegisterActivity extends AppCompatActivity
         String password2 = et_password2.getText().toString();
 
         switch (v.getId()) {
-            case R.id.bt_get_otp:
-                // 点击获取验证码按钮响应事件
-                if (TextUtils.isEmpty(telphone)) {
-                    Toast.makeText(RegisterActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
-                } else {
-                    //获取验证码
-                    //asyncGetOtpCode(telphone);
-                }
-                break;
             case R.id.bt_submit_register:
-                asyncRegister(telphone, otpCode, username, gender, age, password1, password2);
+                asyncRegister(telphone, "2321", username, gender, age, password1, password2);
                 // 点击提交注册按钮响应事件
                 // 尽管后端进行了判空，但Android端依然需要判空
                 break;
@@ -235,7 +221,7 @@ public class RegisterActivity extends AppCompatActivity
                                     String telphone = dataObject.get("telphone").getAsString();
                                     String otpCode = dataObject.get("otpCode").getAsString();
                                     // 自动填充验证码
-                                    setTextInThread(et_otpCode, otpCode);
+                                  //  setTextInThread(et_otpCode, otpCode);
                                     // 在子线程中显示Toast
                                     showToastInThread(RegisterActivity.this, "验证码：" + otpCode);
                                     Log.d(TAG, "telphone: " + telphone + " otpCode: " + otpCode);
@@ -272,15 +258,15 @@ public class RegisterActivity extends AppCompatActivity
             // 发送请求属于耗时操作，开辟子线程
             new Thread(new Runnable() {
                 @Override
-                public void run() {
+                public void run(){
                     // okhttp的使用，POST，异步； 总共5步
                     // 1、初始化okhttpClient对象
                     OkHttpClient okHttpClient = new OkHttpClient();
                     // 2、构建请求体
                     // 注意这里的name 要和后端接收的参数名一一对应，否则无法传递过去
-                    String userAccount=username;
+                    String userAccount=telphone;
                     String userPassword=password1;
-                    String userPhone=telphone;
+                    String userPhone=username;
                     RequestBody requestBody = new FormBody.Builder()
                             .add("userAccount", userAccount)
                             .add("userPassword", userPassword)
@@ -317,7 +303,7 @@ public class RegisterActivity extends AppCompatActivity
                                     editor.putString("password", password1); // 注意这里是password1
 
                                     if (editor.commit()) {
-                                        Intent it_register_to_main = new Intent(RegisterActivity.this, MainActivity.class);
+                                        Intent it_register_to_main = new Intent(RegisterActivity.this,LoginActivity.class);
                                         startActivity(it_register_to_main);
                                         // 注册成功后，注册界面就没必要占据资源了
                                         finish();

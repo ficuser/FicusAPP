@@ -19,10 +19,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ficus.MainActivity;
 import com.example.ficus.NetWork;
 import com.example.ficus.R;
+import com.example.ficus.db.Hotel;
+import com.example.ficus.db.User;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.litepal.LitePal;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,6 +49,7 @@ public class LoginActivity extends AppCompatActivity
     TextView tv_to_register = null;
     TextView tv_forget_password = null;
     TextView tv_service_agreement = null;
+    ImageView hostImage=null;
     ImageView iv_third_method1 = null;
     ImageView iv_third_method2 = null;
     ImageView iv_third_method3 = null;
@@ -56,6 +62,9 @@ public class LoginActivity extends AppCompatActivity
     private String token;
     private String token_telphone;
     private String token_password;
+    SharedPreferences.Editor loginEditor;
+    SharedPreferences loginFlag;
+    private List<User> users;
 
     // Log打印的通用Tag
     private final String TAG = "LoginActivity";
@@ -71,11 +80,22 @@ public class LoginActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         fullScreenConfig();
         setContentView(R.layout.activity_login);
+
+
+
         // 初始化UI对象
         initUI();
+        users= LitePal.findAll(User.class);
+        if(users.size()>0)
+        {
+            Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+            Intent it_login_to_main = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(it_login_to_main);
+            finish();
+        }
+
         // 为点击事件设置监听器
         setOnClickListener();
-
         /*
             设置当输入框焦点失去时提示错误信息
             第一个参数指明输入框对象
@@ -98,6 +118,8 @@ public class LoginActivity extends AppCompatActivity
 
     // 初始化UI对象
     private void initUI() {
+        hostImage=findViewById(R.id.iv_project_icon);
+        hostImage.setImageResource(R.drawable.logo);
         bt_login = findViewById(R.id.bt_login); // 登录按钮
         et_account = findViewById(R.id.et_account); // 输入账号
         et_password = findViewById(R.id.et_password); // 输入密码
@@ -153,7 +175,7 @@ public class LoginActivity extends AppCompatActivity
     }
 
     // 校验密码不少于6位
-    private boolean isPasswordValid(String password) {
+    private boolean isPasswordValid(String password){
         return password != null && password.trim().length() > 5;
     }
 
@@ -207,7 +229,9 @@ public class LoginActivity extends AppCompatActivity
             // 以下功能目前都没有实现
             case R.id.tv_forget_password:
                 // 跳转到修改密码界面
-
+                Intent it_login_to_mainActivity = new Intent(this, MainActivity.class);
+                startActivity(it_login_to_mainActivity);
+                finish();
                 break;
             case R.id.tv_service_agreement:
                 // 跳转到服务协议界面
@@ -292,16 +316,23 @@ public class LoginActivity extends AppCompatActivity
                                 editor.putString("token", "token_value");
                                 editor.putString("telphone", telphone);
                                 editor.putString("password", password);
+                                //Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                                User user=new User();
+                                user.setUserId(null);
+                                user.setUserAccount(telphone);
+                                user.setUserPassword(password);
+                                user.setUserPhone(null);
+                                user.save();
+                                Intent it_login_to_main = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(it_login_to_main);
+                                //getuserId(responseBodyJSONObject);将数据传到主界面！
+                                // 登录成功后，登录界面就没必要占据资源了
+                                finish();
+                                /*
                                 if (editor.commit()) {
-
-                                    Intent it_login_to_main = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(it_login_to_main);
-                                   //getuserId(responseBodyJSONObject);将数据传到主界面！
-                                    // 登录成功后，登录界面就没必要占据资源了
-                                    finish();
-                                } else {
+                                }else{
                                     showToastInThread(LoginActivity.this, "token保存失败，请重新登录");
-                                }
+                                }*/
                             } else {
                                 getResponseErrMsg(LoginActivity.this, responseBodyJSONObject);
                                 Log.d(TAG, "账号或密码验证失败");

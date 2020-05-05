@@ -3,6 +3,7 @@ package com.example.ficus;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,8 +18,11 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ficus.Hotel.HotelAdapter;
 import com.example.ficus.Image.ImageShow;
 import com.example.ficus.Login.activity.LoginActivity;
 import com.example.ficus.Fragment.MyFragmentPaperAdapter;
@@ -26,6 +30,10 @@ import com.example.ficus.Hotel.HotelAcitivity;
 import com.example.ficus.Map.Edit;
 import com.example.ficus.Map.Map;
 import com.example.ficus.Tourist.TouristActivity;
+import com.example.ficus.db.Hotel;
+import com.example.ficus.db.User;
+import com.example.ficus.util.HttpUtil;
+import com.example.ficus.util.Utility;
 import com.example.ficus.way.wayActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,7 +41,16 @@ import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator;
 
+import org.litepal.LitePal;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +69,18 @@ public class MainActivity extends AppCompatActivity {
 
     public DrawerLayout mDraerLayout;
     private Context mContext;
+
+
+
+    private boolean flag=false;
+    private List<SetData> hotelLists=new ArrayList<>();
+    private HotelAdapter adapter;
+    private SwipeRefreshLayout swipeRefresh;
+    private ProgressDialog progressDialog;
+    private List<String> dataList=new ArrayList<>();
+    private List<Hotel> hotels;
+    private List<User> users;
+    private RecyclerView recyclerView;
 
 
     @Override
@@ -96,18 +125,25 @@ public class MainActivity extends AppCompatActivity {
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item){
                 mDraerLayout.closeDrawers();
                 return true;
             }
         });*/
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab= findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
+            public void onClick(View view){
+                users= LitePal.findAll(User.class);
+                if(users.size()>0)
+                {
+                    Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                }else{
+                   // Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                    Intent it_login_to_main = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(it_login_to_main);
+                }
             }
         });
 
@@ -133,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MainActivity.this,"正在加载,请稍后....",Toast.LENGTH_SHORT).show();
                 Intent intent =new Intent(MainActivity.this, wayActivity.class);
                 startActivity(intent);
             }
@@ -162,6 +199,89 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);*/
             }
         });
+        try {
+            queryHotel();
+        }catch (Exception e){
+            Toast.makeText(this,"酒店数据加载异常！",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    private void queryHotel()
+    {
+        hotels= LitePal.findAll(Hotel.class);
+        if(hotels.size()>0)
+        {
+            for(Hotel hotel :hotels){
+                hotelLists.add(new SetData(hotel.getHotelHostelName(),hotel.getHotelPrice(),hotel.getHotelImageUrl()));
+            }
+            if(flag!=false) {
+               // adapter.notifyDataSetChanged();
+            }else
+            {
+            }
+            // recyclerView.set
+        }else{
+            String address= NetWork.getHotelUrl();
+            flag=true;
+            queryFromServer(address,"wuhan");
+        }
+    }
+    private void queryFromServer(String address,final String City)
+    {
+        /*根据传入的地址从服务器上查询数据*/
+        showProgressDialog();
+        HttpUtil.sendOkHttpRequest(address, new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                boolean resulct=false;
+                if("wuhan".equals(City)){
+                    resulct= Utility.handleHotelResponse(responseText);
+                }
+                if(resulct)
+                {
+                    runOnUiThread(new Runnable(){
+                        @Override
+                        public void run(){
+                            closeProgressDialog();
+                            if("wuhan".equals(City))
+                            {
+                                queryHotel();
+                            }
+                        }
+                    });
+                }
+            }
+            public void onFailure(Call call, IOException e){
+                runOnUiThread(new Runnable(){
+                    @Override
+                    public void run(){
+                        closeProgressDialog();
+                        Toast.makeText(MainActivity.this, "酒店数据加载失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+    }
+    /*显示进度对话框*/
+    private void showProgressDialog()
+    {
+        if(progressDialog==null)
+        {
+            progressDialog=new ProgressDialog(this);
+            progressDialog.setMessage("正在加载........");
+            progressDialog.setCanceledOnTouchOutside(false);
+        }
+        progressDialog.show();
+    }
+    /*关闭 进程对话框*/
+    private void closeProgressDialog()
+    {
+        if(progressDialog!=null)
+        {
+            progressDialog.dismiss();
+        }
     }
     private void initMagicIndicator1() {
         MagicIndicator magicIndicator = this.findViewById(R.id.magic_indicator1);

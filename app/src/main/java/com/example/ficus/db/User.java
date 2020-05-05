@@ -6,6 +6,7 @@ public class User extends LitePalSupport{
     private String userAccount;
     private String userPassword;
     private String userPhone;
+
     public Integer getUserId() {
         return this.userId;
     }

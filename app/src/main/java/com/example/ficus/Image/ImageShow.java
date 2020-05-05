@@ -59,16 +59,16 @@ public class ImageShow extends AppCompatActivity  {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
-        private void test(WebView webView)throws InterruptedException {
-            if(Imageurltest!=null)
-            {
-                MywebView mywebView=new MywebView(this,webView,Imageurltest);
-                mywebView.loadUrl();
-            }else{
-                Thread.sleep(3000);
-                Toast.makeText(ImageShow.this,"获取URL失败",Toast.LENGTH_SHORT).show();
-            }
+    private void test(WebView webView)throws InterruptedException {
+        if(Imageurltest!=null)
+        {
+            MywebView mywebView=new MywebView(this,webView,Imageurltest);
+            mywebView.loadUrl();
+        }else{
+            Thread.sleep(3000);
+            Toast.makeText(ImageShow.this,"获取URL失败",Toast.LENGTH_SHORT).show();
         }
+    }
         /*根据传入的地址从服务器上查询数据*/
         private   void queryFromServer(String address,final String type){
             showProgressDialog();

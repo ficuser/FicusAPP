@@ -33,7 +33,7 @@
                         android:text="武汉"
                         android:gravity="bottom|center"
                         android:textSize="16sp"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#FF4081"
                         android:layout_width="65dp"
                         android:layout_height="50dp"
                         android:layout_alignParentTop="true"
