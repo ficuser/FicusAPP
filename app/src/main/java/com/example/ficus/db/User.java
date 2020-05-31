@@ -6,7 +6,6 @@ public class User extends LitePalSupport{
     private String userAccount;
     private String userPassword;
     private String userPhone;
-
     public Integer getUserId() {
         return this.userId;
     }
@@ -19,7 +18,6 @@ public class User extends LitePalSupport{
     public void setUserAccount(String userAccount) {
         this.userAccount = userAccount;
     }
-
     public String getUserPassword() {
         return this.userPassword;
     }

@@ -8,20 +8,16 @@ public class SetData{
         this.text1=name;
         this.text2=price;
         this.imageUrl=imageUrl;}
-
-    public SetData(String name,String imageUrl)
-    {
+    public SetData(String name,int imageId) {
+        this.text1=name;
+        this.imageId=imageId; }
+    public SetData(String name,String imageUrl) {
          this.text1=name;
-         this.imageUrl=imageUrl;
-    }
-
+         this.imageUrl=imageUrl; }
     public SetData(int imageId)
     {
         this.imageId=imageId;
     }
-    public SetData(String name,int imageId) {
-        this.text1=name;
-        this.imageId=imageId; }
     public String getImageUrl(){
         return imageUrl;
     }

@@ -17,17 +17,17 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class Utility {
-    public static boolean handeTouristReponse(String response)
+    public static boolean handleHotelResponse(String response)
     {
         if(!TextUtils.isEmpty(response))
         {
             try{
                 Gson gson=new Gson();
-                List<Tourist> TouristList=gson.fromJson(response,new TypeToken<List<Tourist>>(){}.getType());
-                for(Tourist tourist :TouristList)
+                List<Hotel> HotelList=gson.fromJson(response,new TypeToken<List<Hotel>>(){}.getType());
+                for(Hotel hotel :HotelList)
                 {
                     try {
-                        tourist.save();
+                        hotel.save();
                     }catch (Exception e)
                     {
                         continue;
@@ -40,18 +40,17 @@ public class Utility {
         }
         return false;
     }
-
-    public static boolean handleHotelResponse(String response)
+    public static boolean handeTouristReponse(String response)
     {
         if(!TextUtils.isEmpty(response))
         {
             try{
                 Gson gson=new Gson();
-                List<Hotel> HotelList=gson.fromJson(response,new TypeToken<List<Hotel>>(){}.getType());
-                for(Hotel hotel :HotelList)
+                List<Tourist> TouristList=gson.fromJson(response,new TypeToken<List<Tourist>>(){}.getType());
+                for(Tourist tourist :TouristList)
                 {
                     try {
-                        hotel.save();
+                        tourist.save();
                     }catch (Exception e)
                     {
                         continue;

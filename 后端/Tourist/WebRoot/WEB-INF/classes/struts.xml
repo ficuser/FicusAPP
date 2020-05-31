@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="default" extends="struts-default">
+		<action name="login" class="com.Tourist.action.LoginAction"></action>
+		
+		<action name="register" class="com.Tourist.action.RegisterAction"></action>
+		
+		<action name="tourist" class="com.Tourist.action.TouristAction"></action>
+		
+		<action name="hotel" class="com.Tourist.action.HotelAction"></action>
+		
+		<action name="hotel2" class="com.Tourist.action.HotelActiono"></action>
+		
+		<action name="viewer" class="com.Tourist.action.ViewAction"></action>
+		
+		<action name="image" class="com.Tourist.action.ImageAction"></action>
+	</package>
+</struts>    
